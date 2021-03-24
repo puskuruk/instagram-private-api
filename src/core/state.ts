@@ -34,8 +34,12 @@ export class State {
     return this._APP_VERSION;
   }
 
+  set appVersionCode(appVersionCode) {
+    this._APP_VERSION_CODE = appVersionCode;
+  }
+
   get appVersionCode(): string {
-    return this.constants.APP_VERSION_CODE;
+    return this._APP_VERSION_CODE;
   }
 
   get fbAnalyticsApplicationId(): string {
@@ -83,6 +87,7 @@ export class State {
   uuid: string;
   phoneId: string;
   _APP_VERSION: string;
+  _APP_VERSION_CODE: string;
   /**
    * Google Play Advertising ID.
    *
@@ -237,6 +242,7 @@ export class State {
     if (obj.constants) {
       this.constants = obj.constants;
       this._APP_VERSION = this.constants.APP_VERSION;
+      this._APP_VERSION_CODE = this.constants.APP_VERSION_CODE;
       delete obj.constants;
     }
     if (obj.cookies) {
