@@ -34,8 +34,12 @@ export class State {
     return this._APP_VERSION;
   }
 
+  set appVersionCode(appVersionCode) {
+    this._APP_VERSION_CODE = appVersionCode;
+  }
+
   get appVersionCode(): string {
-    return this.constants.APP_VERSION_CODE;
+    return this._APP_VERSION_CODE;
   }
 
   get fbAnalyticsApplicationId(): string {
@@ -83,6 +87,7 @@ export class State {
   uuid: string;
   phoneId: string;
   _APP_VERSION: string;
+  _APP_VERSION_CODE: string;
   /**
    * Google Play Advertising ID.
    *
@@ -105,6 +110,21 @@ export class State {
   challenge: ChallengeStateResponse | null = null;
   clientSessionIdLifetime: number = 1200000;
   pigeonSessionIdLifetime: number = 1200000;
+
+  constructor() {
+    this._APP_VERSION = Constants.NEW_APP_VERSION;
+    this._APP_VERSION_CODE = Constants.NEW_APP_VERSION_CODE;
+  }
+
+  setNewInstagramVersion() {
+    this.appVersion = this.constants.NEW_APP_VERSION;
+    this.appVersionCode = this.constants.NEW_APP_VERSION_CODE;
+  }
+
+  setOldInstagramVersion() {
+    this.appVersion = this.constants.OLD_APP_VERSION;
+    this.appVersionCode = this.constants.OLD_APP_VERSION_CODE;
+  }
 
   /**
    * The current application session ID.
@@ -236,7 +256,6 @@ export class State {
     State.stateDebug(`Deserializing ${Object.keys(obj).join(', ')}`);
     if (obj.constants) {
       this.constants = obj.constants;
-      this._APP_VERSION = this.constants.APP_VERSION;
       delete obj.constants;
     }
     if (obj.cookies) {
