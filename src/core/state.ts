@@ -26,8 +26,12 @@ export class State {
     return this.constants.BREADCRUMB_KEY;
   }
 
+  set appVersion(appVersion) {
+    this._APP_VERSION = appVersion;
+  }
+
   get appVersion(): string {
-    return this.constants.APP_VERSION;
+    return this._APP_VERSION;
   }
 
   get appVersionCode(): string {
@@ -78,6 +82,7 @@ export class State {
   build: string;
   uuid: string;
   phoneId: string;
+  _APP_VERSION: string;
   /**
    * Google Play Advertising ID.
    *
@@ -226,11 +231,12 @@ export class State {
     const obj = typeof state === 'string' ? JSON.parse(state) : state;
     if (typeof obj !== 'object') {
       State.stateDebug(`State deserialization failed, obj is of type ${typeof obj} (object expected)`);
-      throw new TypeError('State isn\'t an object or serialized JSON');
+      throw new TypeError("State isn't an object or serialized JSON");
     }
     State.stateDebug(`Deserializing ${Object.keys(obj).join(', ')}`);
     if (obj.constants) {
       this.constants = obj.constants;
+      this._APP_VERSION = this.constants.APP_VERSION;
       delete obj.constants;
     }
     if (obj.cookies) {
