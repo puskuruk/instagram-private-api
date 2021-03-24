@@ -59,11 +59,17 @@ class State {
   get userBreadcrumbKey() {
     return this.constants.BREADCRUMB_KEY;
   }
+  set appVersion(appVersion) {
+    this._APP_VERSION = appVersion;
+  }
   get appVersion() {
-    return this.constants.APP_VERSION;
+    return this._APP_VERSION;
+  }
+  set appVersionCode(appVersionCode) {
+    this._APP_VERSION_CODE = appVersionCode;
   }
   get appVersionCode() {
-    return this.constants.APP_VERSION_CODE;
+    return this._APP_VERSION_CODE;
   }
   get fbAnalyticsApplicationId() {
     return this.constants.FACEBOOK_ANALYTICS_APPLICATION_ID;
@@ -189,6 +195,8 @@ class State {
     State.stateDebug(`Deserializing ${Object.keys(obj).join(', ')}`);
     if (obj.constants) {
       this.constants = obj.constants;
+      this._APP_VERSION = this.constants.APP_VERSION;
+      this._APP_VERSION_CODE = this.constants.APP_VERSION_CODE;
       delete obj.constants;
     }
     if (obj.cookies) {

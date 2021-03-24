@@ -7,7 +7,9 @@ export declare class State {
   get signatureKey(): string;
   get signatureVersion(): string;
   get userBreadcrumbKey(): string;
+  set appVersion(appVersion: string);
   get appVersion(): string;
+  set appVersionCode(appVersionCode: string);
   get appVersionCode(): string;
   get fbAnalyticsApplicationId(): string;
   get fbOtaFields(): string;
@@ -43,6 +45,8 @@ export declare class State {
   build: string;
   uuid: string;
   phoneId: string;
+  _APP_VERSION: string;
+  _APP_VERSION_CODE: string;
   adid: string;
   deviceId: string;
   proxyUrl: string;
